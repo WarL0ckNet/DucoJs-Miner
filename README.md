@@ -25,8 +25,10 @@ npm run mine -- -u Username -t 4 -d LOW
   -t, --threads number      Threads count. Default CPU count                                       
   -d, --difficulty string   Mining difficulty. Value may be LOW,MEDIUM,NET,EXTREME. Default MEDIUM 
   -m, --miner string        Miner identifier. Default None
+  -w, --wallet              Show wallet balance
 ```
 
 ### Thanks
 
-Thanks [LDarki](https://github.com/LDarki/NodeJS-DuinoCoin-Miner) for idea.
+* [revoxhere](https://github.com/revoxhere/duino-coin) for DuinoCoin
+* [LDarki](https://github.com/LDarki/NodeJS-DuinoCoin-Miner) for miner idea

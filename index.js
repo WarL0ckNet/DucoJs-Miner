@@ -60,10 +60,38 @@ const startMining = (setting, config) => {
     req.end();
 }
 
+const getBalance = (config, user) => {
+    return new Promise((resolve, reject) => {
+        config.server.path = `/users/${user}`;
+        const req = https.request(config.server, (res) => {
+            res.setEncoding('utf8');
+            let data = '';
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            res.on('end', () => {
+                const json = JSON.parse(data);
+                resolve(json.result.balance.balance);
+            });
+        });
+        req.on('error', (e) => {
+            reject(`Request error: ${e.message}`);
+        });
+        req.end();
+    });
+}
+
 if (args.help || (!setting.user && !args.user)) {
     console.log(commandLineUsage(help.sections));
 } else if (args.version) {
     console.log(` Version: ${config.miner.version}`);
+} else if (args.wallet && (setting.user || args.user)) {
+    getBalance(config, (setting.user ? setting.user : args.user))
+        .then(res => {
+            console.log(` Balance: ${res}`);
+        }, error => {
+            console.error(error);
+        });
 } else {
     if (args.user) setting.user = args.user;
     if (args.threads) setting.threads = args.threads;

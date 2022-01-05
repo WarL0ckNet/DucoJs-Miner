@@ -1,0 +1,30 @@
+{
+  "name": "ducojs-miner",
+  "version": "0.1.0",
+  "description": "A Multi-Threaded Node.JS Miner for DuinoCoin",
+  "main": "index.js",
+  "scripts": {
+    "mine": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WarL0ckNet/DucoJs-Miner.git"
+  },
+  "keywords": [
+    "DuinoCoin",
+    "miner"
+  ],
+  "author": "WarL0ck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WarL0ckNet/DucoJs-Miner/issues"
+  },
+  "homepage": "https://github.com/WarL0ckNet/DucoJs-Miner#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "command-line-args": "^5.2.0",
+    "command-line-usage": "^6.1.1",
+    "cpu": "^1.0.1",
+    "rusha": "^0.8.14"
+  }
+}

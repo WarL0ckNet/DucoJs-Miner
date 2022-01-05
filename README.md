@@ -5,8 +5,14 @@ A Multi-Threaded Node.JS Miner for [DuinoCoin](https://duinocoin.com/)
 
 ```bash
 git clone https://github.com/WarL0ckNet/DucoJs-Miner.git
+```
+```bash
 cd DucoJs-Miner
+```
+```bash
 npm install
+```
+```bash
 npm run mine -- -u Username -t 4 -d LOW
 ```
 
@@ -20,3 +26,7 @@ npm run mine -- -u Username -t 4 -d LOW
   -d, --difficulty string   Mining difficulty. Value may be LOW,MEDIUM,NET,EXTREME. Default MEDIUM 
   -m, --miner string        Miner identifier. Default None
 ```
+
+### Thanks
+
+Thanks [LDarki](https://github.com/LDarki/NodeJS-DuinoCoin-Miner) for idea.

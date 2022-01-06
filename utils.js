@@ -46,7 +46,7 @@ const printReport = (res, stat) => {
     console.log(report);
 }
 
-const printPeriodicReport = (stat) => {
+const printPeriodicReport = (start_time, stat) => {
     let report = `${DateTime.now().toFormat('TT')} ${colors.bgGreen.black.bold(' () ')} Periodic report:\n`,
         time = Math.round(DateTime.now().toSeconds() - stat.periodic.last_report.toSeconds()), uptime_str = '',
         uptime = DateTime.now().diff(start_time, ['weeks', 'days', 'hours', 'minutes', 'seconds']);

@@ -93,7 +93,7 @@ const startMining = (setting, config) => {
                     stat.periodic.time += res.compute;
                     printReport(res, stat);
                     if (DateTime.now().toSeconds() - stat.periodic.last_report.toSeconds() >= config.miner.report_time) {
-                        printPeriodicReport(stat);
+                        printPeriodicReport(start_time, stat);
                     }
                 });
                 worker.on('error', error => {

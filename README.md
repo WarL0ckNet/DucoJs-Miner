@@ -24,8 +24,9 @@ npm run mine -- -u Username -t 4 -d LOW
   -u, --user string         Wallet username                                                        
   -t, --threads number      Threads count. Default CPU count                                       
   -d, --difficulty string   Mining difficulty. Value may be LOW,MEDIUM,NET,EXTREME. Default MEDIUM 
-  -m, --miner string        Miner identifier. Default None
-  -w, --wallet              Show wallet balance
+  -m, --miner string        Miner identifier. Default None                                         
+  -w, --wallet              Show wallet balance                                                    
+  -s, --settings            Show miner settings  
 ```
 
 ### Thanks

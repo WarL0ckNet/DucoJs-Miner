@@ -1,8 +1,11 @@
 module.exports = {
     miner: {
         name: 'DucoJs Miner',
-        version: '0.1.0',
-        settings: `${__dirname}/settings.json`
+        version: '0.1.1',
+        settings: `${__dirname}/settings.json`,
+        timeout: 15,
+        max_attempts: 10,
+        report_time: 120
     },
     server: {
         hostname: 'server.duinocoin.com',
@@ -11,6 +14,6 @@ module.exports = {
     },
     socket: {
         encoding: 'utf8',
-        timeout: 15000
+        timeout: 15
     }
 }

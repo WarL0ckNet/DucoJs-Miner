@@ -36,6 +36,11 @@ const config = require('./config'),
             alias: 'w',
             description: 'Show wallet balance',
             type: Boolean
+        }, {
+            name: 'settings',
+            alias: 's',
+            description: 'Show miner settings',
+            type: Boolean
         }],
     sections = [{
         header: `${config.miner.name} v${config.miner.version}`,

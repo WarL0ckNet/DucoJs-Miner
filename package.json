@@ -25,6 +25,7 @@
     "command-line-args": "^5.2.0",
     "command-line-usage": "^6.1.1",
     "cpu": "^1.0.1",
+    "luxon": "^2.3.0",
     "rusha": "^0.8.14"
   }
 }

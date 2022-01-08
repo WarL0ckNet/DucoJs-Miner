@@ -2,7 +2,9 @@ const { workerData, parentPort, threadId } = require('worker_threads'),
     net = require('net'),
     Rusha = require('rusha');
 
-const socket = new net.Socket(),
+const socket = new net.Socket({
+    allowHalfOpen: true
+}),
     hexHash = Rusha.createHash(),
     single_miner_id = Math.round(2812 * Math.random());
 
@@ -49,7 +51,7 @@ const start = (setting, config) => {
                     report.compute = result.time;
                     report.hashes = result.value;
                     start = new Date();
-                    socket.write(`${result.value},${result.value/result.time},${config.miner.name} v${config.miner.version},${setting.miner},,${single_miner_id}`);
+                    socket.write(`${result.value},${result.value / result.time},${config.miner.name} v${config.miner.version},${setting.miner},,${single_miner_id}`);
                 });
         } else {
             socket.write(`JOB,${setting.user},${setting.difficulty}`);
@@ -62,12 +64,15 @@ socket.once('data', (data) => {
         if (threadId === 1) {
             console.log(`Server version: ${data.toString()}`);
         }
-        socket.write(`MOTD`);
         start(workerData.setting, workerData.config);
     } else {
         console.error(data.toString());
         socket.end();
     }
+});
+
+socket.on('connect', (data) => {
+    console.log(`#${threadId} Socket connected`);
 });
 
 socket.on('error', (err) => {

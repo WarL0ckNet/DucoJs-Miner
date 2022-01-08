@@ -3,9 +3,9 @@ module.exports = {
         name: 'DucoJs Miner',
         version: '0.1.1',
         settings: `${__dirname}/settings.json`,
-        timeout: 15,
-        max_attempts: 10,
-        report_time: 120
+        timeout: 30,
+        max_attempts: 20,
+        report_time: 300
     },
     server: {
         hostname: 'server.duinocoin.com',

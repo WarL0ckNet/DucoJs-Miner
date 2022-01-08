@@ -30,11 +30,13 @@ let setting = readSetting(config.miner.settings),
 
 const getMiningPool = (config) => {
     return new Promise((resolve, reject) => {
-        let attempt = 0;
+        let attempt = 1;
         const handleError = (error) => {
             if (attempt < config.miner.max_attempts) {
-                console.log(`Retrying in ${config.miner.timeout / 1000}s`);
-                setTimeout(sendRequest(config), config.miner.timeout * 1000);
+                console.log(`${attempt}/${config.miner.max_attempts} retrying in ${config.miner.timeout}s`);
+                setTimeout(() => {
+                    sendRequest(config);
+                }, config.miner.timeout * 1000);
                 attempt++;
             } else {
                 reject(error);
@@ -48,17 +50,21 @@ const getMiningPool = (config) => {
                     data += chunk;
                 });
                 res.on('end', () => {
-                    const json = JSON.parse(data);
-                    if (json.success === true) {
-                        if (isValidMiningPool(invalidPools, json)) {
-                            console.log(`Pool: ${json.name}, IP: ${json.ip}, Port: ${json.port} - ${colors.green('GOOD POOL')}`);
-                            resolve(json);
+                    try {
+                        const json = JSON.parse(data);
+                        if (json.success === true) {
+                            if (isValidMiningPool(invalidPools, json)) {
+                                console.log(`Pool: ${json.name}, IP: ${json.ip}, Port: ${json.port} - ${colors.green('GOOD POOL')}`);
+                                resolve(json);
+                            } else {
+                                console.error(`Pool: ${json.name}, IP: ${json.ip}, Port: ${json.port} - ${colors.red('BAD POOL')}`);
+                                handleError('Bad pool');
+                            }
                         } else {
-                            console.error(`Pool: ${json.name}, IP: ${json.ip}, Port: ${json.port} - ${colors.red('BAD POOL')}`);
-                            handleError('Bad pool');
+                            handleError(`Error, could not get pool:\n${data}`);
                         }
-                    } else {
-                        handleError(`Error, could not get pool:\n${data}`);
+                    } catch {
+                        handleError('Errror parsing');
                     }
                 });
             });

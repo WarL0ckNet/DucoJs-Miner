@@ -64,6 +64,7 @@ socket.once('data', (data) => {
         if (threadId === 1) {
             console.log(`Server version: ${data.toString()}`);
         }
+        socket.write(`MOTD`);
         start(workerData.setting, workerData.config);
     } else {
         console.error(data.toString());
@@ -80,7 +81,11 @@ socket.on('error', (err) => {
 });
 
 socket.on('end', () => {
-    throw new Error(`#${threadId}: Connection ended`);
+    console.log(`#${threadId}: Connection ended`);
+    socket.connect(workerData.port, workerData.ip);
+    socket.write(`MOTD`);
+    start(workerData.setting, workerData.config);
+    //throw new Error(`#${threadId}: Connection ended`);
 });
 
 parentPort.on('message', () => {

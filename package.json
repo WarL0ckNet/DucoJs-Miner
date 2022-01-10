@@ -1,6 +1,6 @@
 {
   "name": "ducojs-miner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Multi-Threaded Node.JS Miner for DuinoCoin",
   "main": "index.js",
   "scripts": {
